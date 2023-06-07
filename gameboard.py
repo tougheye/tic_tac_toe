@@ -65,9 +65,13 @@ class GameBoard(Tk):
             self.button_signs.append(row_signs)
         return self.button_signs
 
+    # this function will be activated when the new_game button is pressed
+    # it will reset the grid, turn the game_on, change the text for new button
     def new_game(self):
         for rows in self.buttons:
             for btn in rows:
                 btn.config(text="")
         self.turn_count = 0
         self.game_on = True
+        self.canvas.itemconfig(self.player_won, text="WHO WILL BE THE WINNER THIS TIME?",
+                               font=("Arial", 18), fill='red')
