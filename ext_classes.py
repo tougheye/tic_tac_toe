@@ -33,16 +33,13 @@ class Game(GameBoard):
     def set_sign(self):
         if self.player_1.turn:
             self.sign = self.player_1.sign
-            # print(self.sign)
 
         elif self.player_2.turn:
             self.sign = self.player_2.sign
-            # print(self.sign)
 
         else:
             self.player_1.turn = True
             self.sign = self.player_1.sign
-            # print(self.sign)
 
     def toggle_turn(self):
         print(self.turn_count)
@@ -92,19 +89,21 @@ class Game(GameBoard):
 
     # function to evaluate if either player won
     def eval_positions(self):
-        # player_1 =
-        # player_2 = str(self.score_2)
         self.pos_matrix = np.matrix(self.button_signs)
-        # print(f'current pos_matrix is \n{self.pos_matrix[-3:]}\n'
-        #       f'current flip pos matrix is \n{np.fliplr(self.pos_matrix[-3:])}')          #test print
         if self.player_1_wins():
-            print(f'{self.player_1.sign} won!!!')   # need to update the screen to pop up the message
+            print()
             self.game_on = False
-            self.canvas.itemconfig(self.player_1_score, text=f'{self.player_1.sign}: {self.score_1}')
+            self.canvas.itemconfig(self.player_1_score,
+                                   text=f'{self.player_1.sign}: {self.score_1}')
+            self.canvas.itemconfig(self.player_won, text=f'{self.player_1.sign} won!!!', font=("Arial", 48),
+                                   fill='green')   # update the screen to pop up the winner
         elif self.player_2_wins():
             print(f'{self.player_2.sign} won!!!')
             self.game_on = False
-            self.canvas.itemconfig(self.player_2_score, text=f'{self.player_2.sign}: {self.score_2}')
+            self.canvas.itemconfig(self.player_2_score,
+                                   text=f'{self.player_2.sign}: {self.score_2}')
+            self.canvas.itemconfig(self.player_won, text=f'{self.player_2.sign} won!!!', font=("Arial", 48),
+                                   fill='blue')  # update the screen to pop up the winner
         else:
             print('keep playing')
 
