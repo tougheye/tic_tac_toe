@@ -37,7 +37,6 @@ class Game(GameBoard):
     # the toggle_turn function changes the turn between player 1 and 2. it is called
     # in the button_press class
     def toggle_turn(self):
-        print(self.turn_count)
         if self.player_1.turn:
             self.player_1.turn = False
             self.player_2.turn = True
@@ -89,14 +88,12 @@ class Game(GameBoard):
     def eval_positions(self):
         self.pos_matrix = np.matrix(self.button_signs)
         if self.player_1_wins():
-            print()
             self.game_on = False
             self.canvas.itemconfig(self.player_1_score,
                                    text=f'{self.player_1.sign}: {self.score_1}')
             self.canvas.itemconfig(self.player_won, text=f'{self.player_1.sign} won!!!', font=("Arial", 48),
                                    fill='green')  # update the screen to pop up the winner
         elif self.player_2_wins():
-            print(f'{self.player_2.sign} won!!!')
             self.game_on = False
             self.canvas.itemconfig(self.player_2_score,
                                    text=f'{self.player_2.sign}: {self.score_2}')
