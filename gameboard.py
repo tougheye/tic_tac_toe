@@ -58,6 +58,7 @@ class GameBoard(Tk):
                 self.get_button_signs()
                 self.eval_positions()
 
+
     # function to get the button signs which will be evaluated in the Game class
     def get_button_signs(self):
         for button in self.buttons:
