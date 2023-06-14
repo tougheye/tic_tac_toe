@@ -10,4 +10,6 @@ grid_size = input('Please enter the grid size: ')
 game = Game(sign_1, sign_2, grid_size=grid_size)
 game.start_game()           #to start the game by turning game_on = True
 
-game.mainloop()
+
+if __name__ == '__main__':
+    game.mainloop()

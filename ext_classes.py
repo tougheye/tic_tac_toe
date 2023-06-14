@@ -1,6 +1,5 @@
 from gameboard import GameBoard
 
-
 # creating the player class that will be initiated in main.py and input in Game class
 # this class will have the player attributes of score, sign, and turn
 # Create the game class to update scores, manage turns, and evaluate the positions
@@ -53,24 +52,24 @@ class Game(GameBoard):
         # check rows first and append the diagonals
         for row in current_rows:
             curr_main_diag.append(row[current_rows.index(row)])
-            if all(x == row[0] for x in row):
+            curr_other_diag.append(row[len(row)-1-current_rows.index(row)])
+            if all(x != "" and x == row[0] for x in row):
                 self.winning_sign = row[0]
                 got_result = True
 
         # check the main diagonal
-        if all(x == curr_main_diag[0] for x in curr_main_diag):
+        if all(x != "" and x == curr_main_diag[0] for x in curr_main_diag):
             self.winning_sign = curr_main_diag[0]
             got_result = True
 
         # check columns first and append the other diagonals
         for col in current_columns:
-            curr_other_diag.append(col[current_columns.index(col)])
-            if all(x == col[0] for x in col):
+            if all(x != "" and x == col[0] for x in col):
                 self.winning_sign = col[0]
                 got_result = True
 
         # check the other diagonal
-        if all(x == curr_other_diag[0] for x in curr_other_diag):
+        if all(x != "" and x == curr_other_diag[0] for x in curr_other_diag):
             self.winning_sign = curr_other_diag[0]
             got_result = True
         return got_result
@@ -93,8 +92,8 @@ class Game(GameBoard):
                                        text=f'{self.player_2_sign}: {self.score_2}')
                 self.canvas.itemconfig(self.player_won, text=f'{self.player_2_sign} won!!!', font=("Arial", 48),
                                        fill='blue')  # update the screen to pop up the winner
-        # to check if the game tied
-        elif not self.player_wins() and self.turn_count == self.grid_size * self.grid_size:
+        # to check if the game tied after the maximum turn count
+        elif self.turn_count == self.grid_size * self.grid_size:
             self.game_on = False
             self.canvas.itemconfig(self.player_won, text='Game Tied :(', font=("Arial", 48),
                                    fill='grey')

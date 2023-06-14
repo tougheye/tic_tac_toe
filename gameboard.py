@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import *
 
-
 # create the board class to set up the board, score texts, toggle turns,
 class GameBoard(Tk):
     def __init__(self, grid_size):
@@ -58,7 +57,6 @@ class GameBoard(Tk):
                 self.get_button_signs()
                 self.eval_positions()
 
-
     # function to get the button signs which will be evaluated in the Game class
     def get_button_signs(self):
         for button in self.buttons:
@@ -73,6 +71,8 @@ class GameBoard(Tk):
             for btn in rows:
                 btn.config(text="")
         self.turn_count = 0
+        self.winning_sign = ""
+        self.pos_matrix = None
         self.game_on = True
         self.canvas.itemconfig(self.player_won, text="WHO WILL BE THE WINNER THIS TIME?",
                                font=("Arial", 18), fill='red')
